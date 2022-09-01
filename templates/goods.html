@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <title>饰品</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0
+        }
+
+        body {
+            font: 14px/1.2em Microsoft Yahei, "\5FAE\8F6F\96C5\9ED1", "Hiragino Sans GB", "Hiragino Sans GB W3", arial;
+            color: #333;
+
+            height: 100%;
+            width: 100%
+        }
+
+        li {
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+
+        .list_card li>a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: url("{% static 'item_bg.png' %}");
+            background-size: cover;
+        }
+
+        .list_card li img {
+            position: relative;
+            top: -1px;
+            left: -1px;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .list_card li a img {
+            max-width: 138px;
+        }
+
+        .list_card li h3 {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 15px;
+            line-height: 24px;
+            margin: 8px 12px 27px;
+            width: 190px;
+        }
+
+        .list_card li p {
+            margin: 6px 12px;
+        }
+
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        .f_Strong {
+            color: #eea20e;
+            font-size: 20px;
+            float: left;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        .f_Strong small {
+            line-height: normal;
+        }
+
+        .f_Strong small {
+            font-size: 14px;
+        }
+
+        .l_Right {
+            float: right;
+        }
+
+        .f_Bold {
+            font-weight: 700;
+        }
+
+        .f_12px {
+            font-size: 12px;
+        }
+
+        .c_Gray {
+            color: #959595 !important;
+        }
+
+        .list_card li {
+            border: 1px solid #E4E4E4;
+            float: left;
+            margin: 0 25px 20px 0;
+            position: relative;
+            padding-bottom: 9px;
+            width: 208px;
+            height: 219px;
+            background: #F9F9F9;
+            border-radius: 2px;
+            box-shadow: 0 0 4px 0 rgb(149 149 149 / 30%);
+        }
+
+        a:link {
+            color: #959595;
+            text-decoration: none;
+        }
+
+        .list_card a:link,
+        .list_card a:visited {
+            color: #333;
+        }
+
+        html {
+            height: 100%;
+            width: 100%
+        }
+
+        .center {
+            margin: 0 auto;
+            height: 100%;
+            width: 1200px;
+            position: relative
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+
+        li {
+            list-style: none
+        }
+
+        .tag {
+            -webkit-tap-highlight-color: transparent;
+            font: 14px/1.2em Microsoft Yahei, "\5FAE\8F6F\96C5\9ED1", "Hiragino Sans GB", "Hiragino Sans GB W3", arial;
+            list-style: none;
+            font-size: 12px;
+            display: inline-block;
+            border-radius: 2px;
+            color: #fff;
+            height: 18px;
+            line-height: 17px;
+            padding: 0 6px;
+            margin: 0 6px 0 0;
+            white-space: nowrap;
+            background: #397439;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #page {
+            width: 500px;
+            margin: 0 auto;
+            height: 35px;
+            clear: both;
+            padding-bottom: 30px;
+            text-align: center;
+            line-height: 35px
+        }
+
+        #pre {
+            width: 120px;
+            height: 100%;
+            display: block;
+            text-align: center;
+            line-height: 35px;
+            float: left;
+            background-color: orange;
+
+        }
+
+        #next {
+            width: 120px;
+            height: 100%;
+            display: block;
+            text-align: center;
+            line-height: 35px;
+            float: right;
+            background-color: orange;
+        }
+
+        #page a {
+            color: white
+        }
+
+        #searchbox {
+
+            font: 14px/1.2em Microsoft Yahei, "\5FAE\8F6F\96C5\9ED1", "Hiragino Sans GB", "Hiragino Sans GB W3", arial;
+            color: white;
+            border-top: 1px solid #2c2f38;
+            padding: 14px 10px;
+            min-height: 32px;
+            margin-right: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            line-height: 32px
+        }
+
+        select {
+
+            font: 14px/1.2em Microsoft Yahei, "\5FAE\8F6F\96C5\9ED1", "Hiragino Sans GB", "Hiragino Sans GB W3", arial;
+            border-radius: 2px;
+            text-align: left;
+            min-width: 80px;
+            vertical-align: middle;
+            background: #2D2F3E;
+            color: #9a9b9e;
+            border: none;
+            margin-right: 12px;
+            width: 98px;
+
+        }
+
+        #search {
+            -webkit-tap-highlight-color: transparent;
+            font-family: Microsoft Yahei, "\5FAE\8F6F\96C5\9ED1", "Hiragino Sans GB", "Hiragino Sans GB W3", arial;
+            margin: 0;
+            border: 1px solid #e3e3e3;
+            padding: 3px 6px;
+            line-height: 24px;
+            min-height: 24px;
+            border-radius: 2px;
+            vertical-align: middle;
+            font-size: 12px;
+            border-color: #3F5D97;
+            color: white;
+            background: rgba(255, 255, 255, 0.16);
+            width: 150px;
+            float: right;
+        }
+
+        #sub {
+            -webkit-tap-highlight-color: transparent;
+            font: 14px/1.2em Microsoft Yahei, "\5FAE\8F6F\96C5\9ED1", "Hiragino Sans GB", "Hiragino Sans GB W3", arial;
+            text-decoration: none;
+            display: block;
+            height: 32px;
+            line-height: 30px;
+            background: #3F5D97;
+            color: #E1E5EC;
+            font-size: 14px;
+
+            border-radius: 0 2px 2px 0;
+            margin-left: -2px;
+            padding: 0 16px;
+            float: right;
+            cursor: pointer;
+        }
+        .flex{
+            display:flex;
+        }
+        .flex1{
+            flex:1
+        }
+        .form{
+            height:150px;
+            flex-direction: column;
+        }
+        .main{
+            flex-direction: column;
+            height:2000px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSGO饰品</h1>
+
+    <div class="center">
+        <div id="searchbox">
+            <form action="" method="get">
+                <input type="text" name="page" value="1" hidden>
+                类型&nbsp;
+                <select name="type" id="type" title="类型">
+                    <option value="">全部</option>
+
+                </select>
+                &nbsp;品质&nbsp;
+                <select name="qulity" id="qulity" title="品质">
+                    <option value="">全部</option>
+
+                </select>
+                &nbsp;磨损&nbsp;
+                <select name="fray" id="fray" title="磨损">
+                    <option value="">全部</option>
+
+                </select>
+                &nbsp;稀有度&nbsp;
+                <select name="rarity" id="rarity" title="稀有度">
+                    <option value="">全部</option>
+
+                </select>
+
+                &nbsp;可视化&nbsp;
+                <select name="dataview" id="dataview" title="可视化">
+                    <option value='0'>关闭</option>
+                    <option value='1'>开启</option>
+                </select>
+                <script>
+                    var types = ['匕首', '手枪', '步枪', '微型冲锋枪', '霰弹枪', '机枪', '手套', '印花', '探员', '工具', '涂鸦', '收藏品', '通行证', '礼物', '音乐盒', '武器箱', '钥匙', '布章']
+                    var fraies = ['崭新出厂', '略有磨损', '久经沙场', '破损不堪', '战痕累累', '无涂装']
+                    var rarities = ['违禁', '隐秘', '保密', '受限', '军规级', '工业级', '消费级', '非凡', '卓越', '奇异', '高级', '普通级', '大师']
+                    var qulities = ['普通', '纪念品', 'StatTrak™', '★', '★ StatTrak™']
+                    var type = document.getElementById('type')
+                    var qulity = document.getElementById('qulity')
+                    var fray = document.getElementById('fray')
+                    var rarity = document.getElementById('rarity')
+                    var dataview = document.getElementById('dataview')
+                    for (var i = 0; i < fraies.length; i++) {
+                        var t = document.createElement('option')
+                        t.value = fraies[i]
+                        t.innerHTML = fraies[i]
+                        fray.appendChild(t)
+                    }
+                    for (var i = 0; i < qulities.length; i++) {
+                        var t = document.createElement('option')
+                        t.value = qulities[i]
+                        t.innerHTML = qulities[i]
+                        qulity.appendChild(t)
+                    }
+                    for (var i = 0; i < rarities.length; i++) {
+                        var t = document.createElement('option')
+                        t.value = rarities[i]
+                        t.innerHTML = rarities[i]
+                        rarity.appendChild(t)
+                    }
+                    for (var i = 0; i < types.length; i++) {
+                        var t = document.createElement('option')
+                        t.value = types[i]
+                        t.innerHTML = types[i]
+                        type.appendChild(t)
+                    }
+
+                    for (var i = 0; i < type.options.length; i++) {
+                        if (type.options[i].value == '{{type}}') {
+                            type.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < qulity.options.length; i++) {
+                        if (qulity.options[i].value == '{{qulity}}') {
+                            qulity.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < fray.options.length; i++) {
+                        if (fray.options[i].value == '{{fray}}') {
+                            fray.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < rarity.options.length; i++) {
+                        if (rarity.options[i].value == '{{rarity}}') {
+                            rarity.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < dataview.options.length; i++) {
+                        if (dataview.options[i].value == '{{dataview}}') {
+                            dataview.options[i].selected = true;
+                            break;
+                        }
+                    }
+                </script>
+                <button type="submit" id="sub">
+                    <i class="fa fa-search" aria-hidden="true" class="icon icon_search"></i>
+                    提交
+                </button>
+
+                <input type="text" name="search" id="search" class="i_Text" placeholder="输入物品名称" size="30"
+                    style="width: 150px;" role="combobox" autocomplete="off" autocapitalize="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false"
+                    aria-owns="autocomplete-result-list-1" aria-activedescendant="">
+                <script>
+                    var search = document.getElementById('search')
+                    search.value = '{{search}}'
+                </script>
+            </form>
+        </div>
+        <ul class="list_card" style="width:1200px">
+            {% if dataview == 0 %}
+            {% for data in Datas %}
+            <li>
+                <a href="https://buff.163.com/goods/{{data.id}}?from=market#tab=selling" title="{{data.name}}">
+                    <img class="lazy" src="{{data.img}}" width="210" height="138">
+                </a>
+                <h3><a href="https://buff.163.com/goods/{{data.id}}?from=market#tab=selling"
+                        title="{{data.name}}">{{data.name}}</a></h3>
+
+                <p>
+                    <strong class="f_Strong">¥ {{data.sell_min_price}}</strong>
+                    <span class="l_Right f_12px f_Bold c_Gray">
+
+
+                        {{data.sell_num}}件在售
+
+                    </span>
+                </p>
+
+                <i class="icon icon_check"></i>
+                <span class="tag tag_csgo_wearcategory0">{{data.fray}}</span>
+            </li>
+            {% empty %}
+            <li style="width:1150px;;height:1200px;">
+                <h2 style="text-align:center;margin-top:200px">无数据!</h2>
+            </li>
+            {% endfor %}
+            {% else %}
+            
+            
+            
+            
+            <div class="main flex1 flex">
+                <div class="view1 flex1 flex">
+                    <div class="data1 flex1">
+                        x:{{types}}
+                        y:{{priceavg}}
+                    </div>
+                    
+                </div>
+                <div class="view1 flex1 flex">
+                    <div class="data2 flex1">
+                        x:{{types}}
+                        y:{{pricenums}}
+                    </div>
+                </div>
+                <div class="view2 flex1 flex">
+                    <div class="data3 flex1">
+                        x:{{types}}
+                        y:{{sellnumavg}}
+                    </div>
+                </div>
+                
+                <div class="view2 flex1 flex">
+                    <div class="data4 flex1">
+                        x:{{types}}
+                        y:{{sellnumnums}}
+                    </div>
+                </div>
+            </div>
+            <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+            <script>
+        
+
+                var myChart1 = echarts.init(document.querySelector(".data1"));
+                    //4.指定配置项和数据
+                    x='{{types}}'.replace(/&#x27;/g,'').replace('[','').replace(']','').split(',')
+                    y='{{priceavg}}'.replace('[','').replace(']','').split(',')
+                    
+                
+                    var option = {
+                        title: {
+                            text: '价格平均值'
+                        },
+                        tooltip: {},
+                        legend: {
+                            data:['平均']
+                        },
+                        xAxis: {
+                            data: x
+                        },
+                        yAxis: {},
+                        series: [{
+                            name: '平均',
+                            type: 'bar',
+                            data: y,
+                            label: {
+                                        normal: {
+                                                    show: true,
+                                                    position: 'top',
+                                                    textStyle:{
+                                                        fontSize: '12px',
+                                                        color:'black'
+                                                                }
+                                                }
+                                    }
+                        }]
+                    };
+                    //showEchartsAndLabel(myChart1,option)
+                    //5.将配置项设置给echarts实例对象，使用刚指定的配置项和数据显示图表。
+                    myChart1.setOption(option);
+                var myChart2 = echarts.init(document.querySelector(".data2"));
+                    //4.指定配置项和数据
+                    x='{{types}}'.replace(/&#x27;/g,'').replace('[','').replace(']','').split(',')
+                    y='{{pricenums}}'.replace('[','').replace(']','').split(',')
+                    datas=[]
+                    for(var i=0;i<x.length; i++){
+                        datas.push({
+                            name:x[i],
+                            value:y[i]
+                        })
+                    }
+                    let bgColor = '#fff';
+                    let title = '武器数量';
+                    let color = ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0'];
+        
+                    let formatNumber = function(num) {
+                        let reg = /(?=(\B)(\d{3})+$)/g;
+                        return num.toString().replace(reg, ',');
+                    }
+                    let total = datas.reduce((a, b) => {
+                        return a + b.value * 1
+                    }, 0);
+        
+                    option = {
+                        backgroundColor: bgColor,
+                        color: color,
+                        // tooltip: {
+                        //     trigger: 'item'
+                        // },
+                        title: [{
+                            text: '{name|' + title + '}\n{val|' + formatNumber(total) + '}',
+                            top: 'center',
+                            left: 'center',
+                            textStyle: {
+                                rich: {
+                                    name: {
+                                        fontSize: 14,
+                                        fontWeight: 'normal',
+                                        color: '#666666',
+                                        padding: [10, 0]
+                                    },
+                                    val: {
+                                        fontSize: 32,
+                                        fontWeight: 'bold',
+                                        color: '#333333',
+                                    }
+                                }
+                            }
+                        },{
+                            text: '单位：件',
+                            top: 20,
+                            left: 20,
+                            textStyle: {
+                                fontSize: 14,
+                                color:'#666666',
+                                fontWeight: 400
+                            }
+                        }],
+                        series: [{
+                            type: 'pie',
+                            radius: ['45%', '60%'],
+                            center: ['50%', '50%'],
+                            data: datas,
+                            hoverAnimation: false,
+                            startAngle:180,//起始角度 不设置该值默认为：90
+                            minAngle:10,//设定 最小角度
+                            itemStyle: {
+                                normal: {
+                                    borderColor: bgColor,
+                                    borderWidth: 2
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    length: 20,
+                                    length2: 120,
+                                    lineStyle: {
+                                        color: '#e6e6e6'
+                                    }
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    formatter: params => {
+                                        return (
+                                            '{icon|●}{name|' + params.name + '}{value|' +
+                                            formatNumber(params.value) + '}'
+                                        );
+                                    },
+                                    padding: [0 , -100, 25, -100],
+                                    rich: {
+                                        icon: {
+                                            fontSize: 16
+                                        },
+                                        name: {
+                                            fontSize: 14,
+                                            padding: [0, 10, 0, 4],
+                                            color: '#666666'
+                                        },
+                                        value: {
+                                            fontSize: 18,
+                                            fontWeight: 'bold',
+                                            color: '#333333'
+                                        }
+                                    }
+                                }
+                            },
+                        }]
+                    };
+        
+                    //5.将配置项设置给echarts实例对象，使用刚指定的配置项和数据显示图表。
+                    myChart2.setOption(option);
+        
+                var myChart3 = echarts.init(document.querySelector(".data3"));
+                    //4.指定配置项和数据
+                    x='{{types}}'.replace(/&#x27;/g,'').replace('[','').replace(']','').split(',')
+                    y='{{sellnumavg}}'.replace('[','').replace(']','').split(',')
+                    
+                
+                    var option = {
+                        title: {
+                            text: '销售数量平均'
+                        },
+                        tooltip: {},
+                        legend: {
+                            data:['平均']
+                        },
+                        xAxis: {
+                            data: x
+                        },
+                        yAxis: {},
+                        series: [{
+                            name: '平均',
+                            type: 'bar',
+                            data: y,
+                            label: {
+                                normal: {
+                                            show: true,
+                                            position: 'top',
+                                            textStyle:{
+                                                fontSize: '12px',
+                                                color:'black'
+                                                        }
+                                        }
+                            }
+                        }]
+                    };
+                    //5.将配置项设置给echarts实例对象，使用刚指定的配置项和数据显示图表。
+                    myChart3.setOption(option);
+        
+                    var myChart4 = echarts.init(document.querySelector(".data4"));
+                    //4.指定配置项和数据
+                    x='{{types}}'.replace(/&#x27;/g,'').replace('[','').replace(']','').split(',')
+                    y='{{sellnumnums}}'.replace('[','').replace(']','').split(',')
+                    
+                    title = '武器销售数量';
+                    
+                    datas=[]
+                    for(var i=0;i<x.length; i++){
+                        datas.push({
+                            name:x[i],
+                            value:y[i]
+                        })
+                    }
+                    formatNumber = function(num) {
+                        let reg = /(?=(\B)(\d{3})+$)/g;
+                        return num.toString().replace(reg, ',');
+                    }
+                    total = datas.reduce((a, b) => {
+                        return a + b.value * 1
+                    }, 0);
+        
+                    option = {
+                        backgroundColor: bgColor,
+                        color: color,
+                        // tooltip: {
+                        //     trigger: 'item'
+                        // },
+                        title: [{
+                            text: '{name|' + title + '}\n{val|' + formatNumber(total) + '}',
+                            top: 'center',
+                            left: 'center',
+                            textStyle: {
+                                rich: {
+                                    name: {
+                                        fontSize: 14,
+                                        fontWeight: 'normal',
+                                        color: '#666666',
+                                        padding: [10, 0]
+                                    },
+                                    val: {
+                                        fontSize: 32,
+                                        fontWeight: 'bold',
+                                        color: '#333333',
+                                    }
+                                }
+                            }
+                        },{
+                            text: '单位：件',
+                            top: 20,
+                            left: 20,
+                            textStyle: {
+                                fontSize: 14,
+                                color:'#666666',
+                                fontWeight: 400
+                            }
+                        }],
+                        series: [{
+                            type: 'pie',
+                            radius: ['45%', '60%'],
+                            center: ['50%', '50%'],
+                            data: datas,
+                            hoverAnimation: false,
+                            startAngle:180,//起始角度 不设置该值默认为：90
+                            minAngle:10,//设定 最小角度
+                            itemStyle: {
+                                normal: {
+                                    borderColor: bgColor,
+                                    borderWidth: 2
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    length: 20,
+                                    length2: 120,
+                                    lineStyle: {
+                                        color: '#e6e6e6'
+                                    }
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    formatter: params => {
+                                        return (
+                                            '{icon|●}{name|' + params.name + '}{value|' +
+                                            formatNumber(params.value) + '}'
+                                        );
+                                    },
+                                    padding: [0 , -100, 25, -100],
+                                    rich: {
+                                        icon: {
+                                            fontSize: 16
+                                        },
+                                        name: {
+                                            fontSize: 14,
+                                            padding: [0, 10, 0, 4],
+                                            color: '#666666'
+                                        },
+                                        value: {
+                                            fontSize: 18,
+                                            fontWeight: 'bold',
+                                            color: '#333333'
+                                        }
+                                    }
+                                }
+                            },
+                        }]
+                    };
+                    //5.将配置项设置给echarts实例对象，使用刚指定的配置项和数据显示图表。
+                    myChart4.setOption(option);
+            </script>
+            {% endif %}
+        </ul>
+        <div id="page">
+            <a id="pre">上一页</a>
+            第{{page}}页/共{{allpage}}页
+            <a id="next">下一页</a>
+        </div>
+        <script>
+            var page = Number('{{page}}')
+            var p = document.getElementById('page')
+            var num = Number('{{num}}')
+            var pre = document.getElementById('pre')
+            var next = document.getElementById('next')
+            pre.href = '?page=' + (page - 1) + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+            next.href = '?page=' + (page + 1) + '&num=' + num + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+            if (page == 1) {
+                pre.href = '?page=' + 1 + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+                next.href = '?page=' + (page + 1) + '&num=' + num + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+            }
+            else if (page < 1) {
+                page = 1
+                pre.href = '?page=' + page + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+                next.href = '?page=' + (page + 1) + '&num=' + num + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+            }
+            else if (page >= Number('{{allpage}}')) {
+                page = Number('{{allpage}}')
+                pre.href = '?page=' + (page - 1) + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+                next.href = '?page=' + page + '&num=' + num + '&type={{type}}&qulity={{qulity}}&fray={{fray}}&rarity={{rarity}}&search={{search}}'
+
+            }
+            if (Number('{{dataview}}')) {
+                p.style.display = 'none'
+            }
+
+
+        </script>
+    </div>
+</body>
+
+</html>
