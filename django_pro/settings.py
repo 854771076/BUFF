@@ -79,14 +79,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_pro.wsgi.application'
 
-
+#换为自己的数据库
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spider',  #zhaopin_test   #recruit_info
         'USER':'spider' ,        #os.environ.get('DJANGO_MYSQL_USER')
-        'PASSWORD': 'Rb7snZyNsf3mS6GR',     #os.environ.get('DJANGO_MYSQL_PASSWORD')
-        'HOST': '124.223.62.222',   #os.environ.get('DJANGO_MYSQL_HOST')
+        'PASSWORD': '123456',     #os.environ.get('DJANGO_MYSQL_PASSWORD')
+        'HOST': '127.0.0.1',   #os.environ.get('DJANGO_MYSQL_HOST')
         'PORT': 3306,
         'OPTIONS': {'charset': 'utf8mb4'},
     }
