@@ -57,7 +57,27 @@ class BUFFSpider():
         self.getPage_source()
         self.parse()
 if __name__ == '__main__':
-    from mymodel.spider import Headers
+    #将字符串请求头转换为字典格式
+    def Headers(headers):
+        headers=headers.replace(' ','').split('\n')
+        keys=[]
+        values=[]
+        front=0
+        for i in headers:
+            key=[]
+            value=[]
+            for j,s in enumerate(list(i)):
+                if front==0:
+                    if j!=0 and s==':':
+                        front=1
+                        continue
+                    key.append(s)
+                else:
+                    value.append(s)
+            keys.append(''.join(key))
+            values.append(''.join(value))
+            front=0
+        return dict(zip(keys,values))
     #获取全部页url和headers
     #网页buff商品数据api
     baseUrl='https://buff.163.com/api/market/goods'
