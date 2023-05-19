@@ -4,5 +4,5 @@ mysqlclient==2.1.1
 pandas
 PyMySQL==1.0.3
 requests
-SQLAlchemy==2.0.13
+SQLAlchemy
 
