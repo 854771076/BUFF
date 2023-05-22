@@ -58,22 +58,22 @@ def goods(request):
         BUFF=BUFF.filter(fray=fray)
     if rarity!='':
         BUFF=BUFF.filter(rarity=rarity)
+    maxtime=BUFF.aggregate(Max('time')).get('time__max')
+    mintime=BUFF.aggregate(Min('time')).get('time__min')
     if down:
-        maxtime=BUFF.aggregate(Max('time')).get('time__max')
-        mintime=BUFF.aggregate(Min('time')).get('time__min')
+        
         BUFF=BUFF.filter(Q(time=maxtime)|Q(time=mintime))
         df=pd.DataFrame(BUFF.values_list())
         df.columns=['bid', 'appid', 'bookmarked', 'buy_max_price', 'buy_num', 'can_bargain', 'can_search_by_tournament', 'description', 'game', 'has_buff_price_history', 'id', 'market_hash_name', 'market_min_price', 'name', 'quick_price', 'sell_min_price', 'sell_num', 'sell_reference_price', 'short_name', 'steam_market_url', 'transacted_num', 'img', 'type', 'fray', 'quality', 'rarity', 'time']
-        # maxtime=df.groupby('id').max().time.iloc[0]
-        # mintime=df.groupby('id').min().time.iloc[0]
-        
         df2=df[df.time==maxtime]
         df3=df[df.time==mintime][['id','time','quick_price']]
         dfnew=df2.merge(df3,how='outer',on='id')
         dfnew=dfnew[dfnew.quick_price_x<dfnew.quick_price_y]
         bid=dfnew.bid.values.tolist()
         BUFF=BUFF.filter(bid__in=bid)
+
     else:
+
         BUFF=BUFF.filter(Q(time__year=year)&Q(time__month=month)&Q(time__day=day))
     if dataview==1:
         view1=BUFF.values('type').annotate(a=Avg('sell_min_price'),c=Count('sell_min_price'))
@@ -100,6 +100,6 @@ def goods(request):
     end=page*num
     allpage=BUFF.count()//num+1
     Datas=BUFF[start:end]
-    
+    spiderlist=Buff.objects.values('time').annotate(Count('time'))
     return render(request,'goods.html',context=locals())
     

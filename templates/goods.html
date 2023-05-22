@@ -289,9 +289,17 @@
 </head>
 
 <body>
-    <h1>CSGO饰品{{maxtime}}</h1>
-
+    <h1>CSGO饰品</h1>
+    <div style="width:200px;position: absolute;left:0;text-align: center;">
+            <h3>数据汇总</h3>  
+            {% for i in spiderlist %}
+            <div>
+                <span>{{i.time | date:"Y/m/d" }}-{{i.time__count}}条</span>
+            </div>
+            {% endfor %}
+        </div>
     <div class="center">
+        
         <div id="searchbox">
             <form action="" method="get">
                 类型&nbsp;
