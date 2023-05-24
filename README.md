@@ -1,4 +1,3 @@
-[TOC]
 
 # CSGO数据分析系统
 
@@ -44,15 +43,15 @@ https://zhuanlan.zhihu.com/p/569019068
 
 * 复制项目根目录地址
 
-![image-20230522134542540](img\1.png)
+![image-20230522134542540](img/1.png)
 
 * 按下win+r，输入cmd打开控制台
 
-![](img\2.png)
+![](img/2.png)
 
 * 输入cd + 刚刚复制的地址
 
-![3](img\3.png)
+![3](img/3.png)
 
 * 安装第三方库
 
@@ -66,9 +65,9 @@ pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 
 ​	项目的配置文件是spider_setting.py这个文件，里面可以配置爬虫的cookie和数据库连接的参数
 
-![4](img\4.png)
+![4](img/4.png)
 
-![5](img\5.png)
+![5](img/5.png)
 
 #### 2.4 cookie获取
 
@@ -96,7 +95,7 @@ pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 
 * 进入后刷新网页，点击筛选器里的文档，找到buff.163.com，然后在请求标头里复制cookie的值（buff是10天更新一次cookie，意思是十天就需要换一次cookie）
 
-![6](img\6.png)
+![6](img/6.png)
 
 ### 三、运行项目
 
@@ -115,4 +114,4 @@ python manage.py runserver
 
 * 打开控制台返回的链接
 
-![7](C:\Users\admin\Desktop\BUFF\img\7.png)
+![7](img/7.png)
