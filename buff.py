@@ -6,7 +6,7 @@ import time,random
 import fake_useragent
 ua=fake_useragent.FakeUserAgent()
 class MysqlDB():
-    def __init__(self,user='buff',password='fiang123',host='106.14.66.39',port=3306,charset='utf8',db='buff',**params):
+    def __init__(self,user='root',password='root',host='127.0.0.1',port=3306,charset='utf8',db='buff',**params):
         from sqlalchemy import create_engine
         self.conn=create_engine(f'mysql+pymysql://{user}:{password}@{host}:{port}/{db}?charset={charset}',echo=True)
     def save_pd(self,val,table:str,columns=None,method:str='replace'):
