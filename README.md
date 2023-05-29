@@ -105,10 +105,16 @@ pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 ```
 python buff.py
 ```
-
+* MySQL添加表主键bid
+```
+use buff;
+alter table BUFF add bid int(11) primary key AUTO_INCREMENT;
+alter table BUFF auto_increment=1;
+```
 * 输入前端模块运行指令
 
 ```
+python manage.py migrate
 python manage.py runserver
 ```
 
