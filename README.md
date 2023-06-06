@@ -1,6 +1,6 @@
 
 # CSGO数据分析系统
-## 联系方式
+### 联系方式
 [哔哩哔哩原视频](https://www.bilibili.com/video/BV12V4y1H7NE/)
 
 **QQ:** 854771076
